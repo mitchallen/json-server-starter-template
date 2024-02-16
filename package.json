@@ -1,0 +1,26 @@
+{
+  "name": "json-server-starter-template",
+  "version": "1.0.0",
+  "description": "A simple JSON health and swagger server",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "docker:clean": "docker stop my-service && docker rm my-service && docker rmi json-server-img",
+    "docker:build": "docker build . -t json-server-img",
+    "predocker:run": "npm run docker:build",
+    "docker:run": "docker run -d -p 3100:3000 --restart always --env-file ./env.docker.list --name my-service json-server-img",
+    "postdocker:run": "docker ps --size | grep json-server-img && echo open localhost:3100",
+    "docker:rerun": "npm run docker:clean || true && npm run docker:run",
+    "docker:stop": "docker stop my-service",
+    "docker:start": "docker start my-service",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["api", "swagger", "json"],
+  "author": "Mitch Allen <https://mitchallen.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  }
+}

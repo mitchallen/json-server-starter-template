@@ -1,0 +1,42 @@
+/:
+  get:
+    summary: Get the service status
+    tags: 
+      - service health
+    responses:
+      200:
+        description: Service status
+        content:
+          application/json:
+            schema:
+            type: object
+            example:
+              name: app name
+              explorer: /api-docs
+              uptime: 00:00:31
+      500:
+        description: Internal service error
+/admin/kill:
+  parameters:
+    - in: header
+      name: x-admin-key
+      schema:
+        type: string
+        default: admin-key
+      required: true
+      description: admin api key
+  get:
+    summary: Kill the service
+    tags: 
+      - service health
+    responses:
+      200:
+        description: Reboot the service
+        content:
+          application/json:
+            schema:
+            type: object
+            example:
+              status: OK 
+      500:
+        description: Internal service error
